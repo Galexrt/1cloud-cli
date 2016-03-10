@@ -1,6 +1,7 @@
 package apiauth
 
-var ApiKey string
+// APIKey
+var AAPIKey string
 
 func Auth() string {
 
