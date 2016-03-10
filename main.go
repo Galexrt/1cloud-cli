@@ -26,12 +26,10 @@ func main() {
 	flag.Parse()
 
 	app := cli.NewApp()
-	app.Name = "boom"
-	app.Usage = "make an explosive entrance"
-	app.Action = func(c *cli.Context) {
-		println("boom! I say!")
-	}
+	app.Name = "1cloud-cli"
+	app.Usage = "access to 1&1 cloud api"
 	app.EnableBashCompletion = true
+
 	app.Commands = apiv1.GetAPICommands()
 
 	app.Run(os.Args)
