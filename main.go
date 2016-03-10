@@ -5,8 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/coreos/pkg/flagutil"
-	"github.com/galexrt/1u1cloud-cli/apiauth"
+	"github.com/codegangsta/cli"
 )
 
 type cmdLineOpts struct {
@@ -24,82 +23,128 @@ func showHelp() {
 
 func main() {
 	flag.Parse()
-	if opts.version {
-		fmt.Printf("1u1cloud-cli")
-		flag.PrintDefaults()
-		os.Exit(0)
+
+	app := cli.NewApp()
+	app.Name = "boom"
+	app.Usage = "make an explosive entrance"
+	app.Action = func(c *cli.Context) {
+		println("boom! I say!")
 	}
-	if opts.help {
-		showHelp()
+	app.EnableBashCompletion = true
+
+	app.Commands = []cli.Command{
+		{
+			Name:    "servers",
+			Aliases: []string{"net"},
+			Usage:   "add or list servers ",
+			Subcommands: []cli.Command{
+				{
+					Name: "list",
+					Action: func(c *cli.Context) {
+						println("server list", c.Args().First())
+					},
+				},
+				{
+					Name: "add",
+					Action: func(c *cli.Context) {
+						println("server list", c.Args().First())
+					},
+				},
+			},
+		},
+		{
+			Name:    "complete",
+			Aliases: []string{"c"},
+			Usage:   "complete a task on the list",
+			Action: func(c *cli.Context) {
+				println("completed task: ", c.Args().First())
+			},
+		},
+		{
+			Name:    "template",
+			Aliases: []string{"r"},
+			Usage:   "options for task templates",
+			Subcommands: []cli.Command{
+				{
+					Name:  "add",
+					Usage: "add a new template",
+					Action: func(c *cli.Context) {
+						println("new task template: ", c.Args().First())
+					},
+				},
+				{
+					Name:  "remove",
+					Usage: "remove an existing template",
+					Action: func(c *cli.Context) {
+						println("removed task template: ", c.Args().First())
+					},
+				},
+			},
+		},
 	}
-	flagutil.SetFlagsFromEnv(flag.CommandLine, "1U1CLOUD")
 
-	switch os.Args[1] {
-	case "auth":
-		apiauth.Auth()
-	case "servers":
+	app.Run(os.Args)
+	/*
+		case "auth":
 
-	case "images":
+		case "servers":
 
-	case "shared_storages":
-		fallthrough
-	case "sharedstorages":
+		case "images":
 
-	case "firewall":
-		fallthrough
-	case "firewallpolicies":
+		case "shared_storages":
+			fallthrough
+		case "sharedstorages":
 
-	case "load_balancer":
-		fallthrough
-	case "loadbalancer":
+		case "firewall":
+			fallthrough
+		case "firewallpolicies":
 
-	case "ips":
-		fallthrough
-	case "public_ips":
-		fallthrough
-	case "publicips":
+		case "load_balancer":
+			fallthrough
+		case "loadbalancer":
 
-	case "privatenetworks":
-		fallthrough
-	case "private_networks":
+		case "ips":
+			fallthrough
+		case "public_ips":
+			fallthrough
+		case "publicips":
 
-	case "vpn":
-		fallthrough
-	case "monitoring_center":
-		fallthrough
-	case "monitoringcenter":
+		case "privatenetworks":
+			fallthrough
+		case "private_networks":
 
-	case "monitoring_policies":
+		case "vpn":
+			fallthrough
+		case "monitoring_center":
+			fallthrough
+		case "monitoringcenter":
 
-	case "monitoringpolicies":
+		case "monitoring_policies":
 
-	case "logs":
+		case "monitoringpolicies":
 
-	case "users":
+		case "logs":
 
-	case "roles":
+		case "users":
 
-	case "serverappliances":
-		fallthrough
-	case "server_appliances":
+		case "roles":
 
-	case "dvdiso":
-		fallthrough
-	case "dvd_iso":
+		case "serverappliances":
+			fallthrough
+		case "server_appliances":
 
-		// ping authentication has been ignored here
-	case "ping":
+		case "dvdiso":
+			fallthrough
+		case "dvd_iso":
 
-	case "pricing":
+			// ping authentication has been ignored here
+		case "ping":
 
-	case "datacenters":
+		case "pricing":
 
-	case "":
-		fallthrough
-	case "help":
-		showHelp()
-	default:
-		fmt.Print("No command given.")
-		os.Exit(2)
-	}
+		case "datacenters":
+
+		case "":
+			fallthrough
+	*/
 }
