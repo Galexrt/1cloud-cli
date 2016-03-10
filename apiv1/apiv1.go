@@ -2,7 +2,14 @@ package apiv1
 
 import (
 	"github.com/codegangsta/cli"
+	"github.com/galexrt/1cloud-cli/apiv1/authapi"
+	"github.com/galexrt/1cloud-cli/apiv1/pingapi"
 )
+
+// APIURL url to api
+var APIURL = "https://cloudpanel-api.1and1.com/v1/"
+
+var authToken string
 
 var commands = []cli.Command{
 	{
@@ -10,6 +17,12 @@ var commands = []cli.Command{
 		Aliases: []string{"net"},
 		Usage:   "add or list servers ",
 		Flags: []cli.Flag{
+			cli.StringFlag{
+				Name:        "token",
+				Value:       "",
+				Usage:       "token",
+				Destination: &authToken,
+			},
 			cli.StringFlag{
 				Name:  "server_id",
 				Value: "",
@@ -148,6 +161,25 @@ var commands = []cli.Command{
 					println("clone", c.Args().First())
 				},
 			},
+		},
+	},
+	{
+		Name: "ping",
+		Action: func(c *cli.Context) {
+			pingapi.Ping(c, APIURL)
+		},
+	},
+	{
+		Name: "ping_auth",
+		Action: func(c *cli.Context) {
+			pingapi.PingAuth(c, APIURL)
+		},
+	},
+	{
+		Name: "auth",
+		Action: func(c *cli.Context) {
+			authapi.SetAuthToken(authToken)
+			authapi.Auth(c, APIURL)
 		},
 	},
 }
