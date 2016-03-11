@@ -320,6 +320,228 @@ var commands = []cli.Command{
 		},
 	},
 	{
+		Name:    "vpns",
+		Aliases: []string{"vpn"},
+		Action: func(c *cli.Context) {
+			println("vpns")
+		},
+		Flags: []cli.Flag{
+			cli.StringFlag{
+				Name:  "vpn_id",
+				Value: "",
+				Usage: "vpn_id",
+			},
+		},
+		Subcommands: []cli.Command{
+			{
+				Name: "configuration_file",
+				Action: func(c *cli.Context) {
+					println("configuration_file")
+				},
+			},
+		},
+	},
+	{
+		Name: "monitoring_center",
+		Action: func(c *cli.Context) {
+			println("monitoring_center")
+		},
+		Flags: []cli.Flag{
+			cli.StringFlag{
+				Name:  "server_id",
+				Value: "",
+				Usage: "server_id",
+			},
+		},
+	},
+	{
+		Name: "monitoring_policies",
+		Action: func(c *cli.Context) {
+			println("monitoring_policies")
+		},
+		Flags: []cli.Flag{
+			cli.StringFlag{
+				Name:  "monitoring_policy_id",
+				Value: "",
+				Usage: "monitoring_policy_id",
+			},
+		},
+		Subcommands: []cli.Command{
+			{
+				Name: "ports",
+				Action: func(c *cli.Context) {
+					println("ports")
+				},
+				Flags: []cli.Flag{
+					cli.StringFlag{
+						Name:  "port_id",
+						Value: "",
+						Usage: "port_id",
+					},
+				},
+			},
+			{
+				Name: "processes",
+				Action: func(c *cli.Context) {
+					println("processes")
+				},
+				Flags: []cli.Flag{
+					cli.StringFlag{
+						Name:  "process_id",
+						Value: "",
+						Usage: "process_id",
+					},
+				},
+			},
+			{
+				Name: "servers",
+				Action: func(c *cli.Context) {
+					println("servers")
+				},
+				Flags: []cli.Flag{
+					cli.StringFlag{
+						Name:  "server_id",
+						Value: "",
+						Usage: "server_id",
+					},
+				},
+			},
+		},
+	},
+	{
+		Name: "logs",
+		Action: func(c *cli.Context) {
+			println("logs")
+		},
+		Flags: []cli.Flag{
+			cli.StringFlag{
+				Name:  "log_id",
+				Value: "",
+				Usage: "log_id",
+			},
+		},
+	},
+	{
+		Name: "users",
+		Action: func(c *cli.Context) {
+			println("users")
+		},
+		Flags: []cli.Flag{
+			cli.StringFlag{
+				Name:  "user_id",
+				Value: "",
+				Usage: "user_id",
+			},
+		},
+		Subcommands: []cli.Command{
+			{
+				Name: "api",
+				Action: func(c *cli.Context) {
+					println("api")
+				},
+				Subcommands: []cli.Command{
+					{
+						Name: "key",
+						Action: func(c *cli.Context) {
+							println("key")
+						},
+					},
+					{
+						Name: "ips",
+						Action: func(c *cli.Context) {
+							println("ips")
+						},
+						Flags: []cli.Flag{
+							cli.StringFlag{
+								Name:  "ip",
+								Value: "",
+								Usage: "ip",
+							},
+						},
+					},
+				},
+			},
+			{
+				Name: "current_user_permissions",
+				Action: func(c *cli.Context) {
+					println("current_user_permissions")
+				},
+			},
+		},
+	},
+	{
+		Name: "roles",
+		Action: func(c *cli.Context) {
+			println("roles")
+		},
+		Flags: []cli.Flag{
+			cli.StringFlag{
+				Name:  "role_id",
+				Value: "",
+				Usage: "role_id",
+			},
+		},
+		Subcommands: []cli.Command{
+			{
+				Name: "permissions",
+				Action: func(c *cli.Context) {
+					println("permissions")
+				},
+			},
+			{
+				Name: "users",
+				Action: func(c *cli.Context) {
+					println("users")
+				},
+				Flags: []cli.Flag{
+					cli.StringFlag{
+						Name:  "user_id",
+						Value: "",
+						Usage: "user_id",
+					},
+				},
+			},
+			{
+				Name: "clone",
+				Action: func(c *cli.Context) {
+					println("clone")
+				},
+			},
+		},
+	},
+	{
+		Name: "usages",
+		Action: func(c *cli.Context) {
+			println("usages")
+		},
+	},
+	{
+		Name: "server_appliances",
+		Action: func(c *cli.Context) {
+			println("server_appliances")
+		},
+		Flags: []cli.Flag{
+			cli.StringFlag{
+				Name:  "id",
+				Value: "",
+				Usage: "id",
+			},
+		},
+	},
+	{
+		Name: "dvd_isos",
+		Action: func(c *cli.Context) {
+			println("dvd_isos")
+		},
+		Flags: []cli.Flag{
+			cli.StringFlag{
+				Name:  "id",
+				Value: "",
+				Usage: "id",
+			},
+		},
+	},
+	{
 		Name: "ping",
 		Action: func(c *cli.Context) {
 			pingapi.Ping(c, APIURL)
