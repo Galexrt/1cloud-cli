@@ -13,7 +13,7 @@ import (
 // API for /servers/*
 
 // Servers the api
-func Servers(c *cli.Context, apiURL string) {
+func ServersList(c *cli.Context, apiURL string) {
 	httpclient.Defaults(httpclient.Map{
 		httpclient.OPT_USERAGENT: "1cloud-cli",
 		"Accept-Language":        "en-us",

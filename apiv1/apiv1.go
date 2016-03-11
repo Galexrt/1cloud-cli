@@ -16,7 +16,7 @@ var commands = []cli.Command{
 		Name:    "servers",
 		Aliases: []string{"server", "srv"},
 		Action: func(c *cli.Context) {
-			serversapi.Servers(c, APIURL)
+			serversapi.ServersList(c, APIURL)
 		},
 		Usage: "add or list servers ",
 		Flags: []cli.Flag{
@@ -31,8 +31,7 @@ var commands = []cli.Command{
 				Name:    "list",
 				Aliases: []string{"ls"},
 				Action: func(c *cli.Context) {
-
-					println("server list", c.Args().First())
+					serversapi.ServersList(c, APIURL)
 				},
 			},
 			{
