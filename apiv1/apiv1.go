@@ -292,6 +292,34 @@ var commands = []cli.Command{
 		},
 	},
 	{
+		Name: "private_networks",
+		Action: func(c *cli.Context) {
+			println("private_networks")
+		},
+		Flags: []cli.Flag{
+			cli.StringFlag{
+				Name:  "private_network_id",
+				Value: "",
+				Usage: "private_network_id",
+			},
+		},
+		Subcommands: []cli.Command{
+			{
+				Name: "servers",
+				Action: func(c *cli.Context) {
+					println("servers")
+				},
+				Flags: []cli.Flag{
+					cli.StringFlag{
+						Name:  "server_id",
+						Value: "",
+						Usage: "server_id",
+					},
+				},
+			},
+		},
+	},
+	{
 		Name: "ping",
 		Action: func(c *cli.Context) {
 			pingapi.Ping(c, APIURL)
