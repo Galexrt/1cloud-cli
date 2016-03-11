@@ -1,30 +1,14 @@
 package main
 
 import (
-	"flag"
-	"fmt"
 	"os"
 
 	"github.com/codegangsta/cli"
 	"github.com/galexrt/1cloud-cli/apiv1"
+	_ "github.com/galexrt/1cloud-cli/apiv1/authapi"
 )
 
-type cmdLineOpts struct {
-	help    bool
-	version bool
-}
-
-var opts cmdLineOpts
-
-func showHelp() {
-	fmt.Printf("%s [command] [args]", os.Args[0])
-	flag.PrintDefaults()
-	os.Exit(0)
-}
-
 func main() {
-	flag.Parse()
-
 	app := cli.NewApp()
 	app.Name = "1cloud-cli"
 	app.Usage = "access to 1&1 cloud api"

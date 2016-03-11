@@ -14,7 +14,7 @@ var authToken string
 var commands = []cli.Command{
 	{
 		Name:    "servers",
-		Aliases: []string{"net"},
+		Aliases: []string{"server", "srv"},
 		Usage:   "add or list servers ",
 		Flags: []cli.Flag{
 			cli.StringFlag{
@@ -164,6 +164,134 @@ var commands = []cli.Command{
 		},
 	},
 	{
+		Name: "images",
+		Action: func(c *cli.Context) {
+			println("images")
+		},
+		Flags: []cli.Flag{
+			cli.StringFlag{
+				Name:  "image_id",
+				Value: "",
+				Usage: "image_id",
+			},
+		},
+	},
+	{
+		Name: "shared_storages",
+		Action: func(c *cli.Context) {
+			println("shared_storages")
+		},
+		Subcommands: []cli.Command{
+			{
+				Name: "servers",
+				Action: func(c *cli.Context) {
+					println("servers")
+				},
+				Flags: []cli.Flag{
+					cli.StringFlag{
+						Name:  "server_id",
+						Value: "",
+						Usage: "server_id",
+					},
+				},
+			},
+			{
+				Name: "access",
+				Action: func(c *cli.Context) {
+					println("access")
+				},
+			},
+		},
+	},
+	{
+		Name: "firewall_policies",
+		Action: func(c *cli.Context) {
+			println("firewall_policies")
+		},
+		Flags: []cli.Flag{
+			cli.StringFlag{
+				Name:  "firewall_id",
+				Value: "",
+				Usage: "firewall_id",
+			},
+		},
+		Subcommands: []cli.Command{
+			{
+				Name: "server_ips",
+				Action: func(c *cli.Context) {
+					println("server_ips")
+				},
+				Flags: []cli.Flag{
+					cli.StringFlag{
+						Name:  "server_ip",
+						Value: "",
+						Usage: "server_ip",
+					},
+				},
+			},
+			{
+				Name: "rules",
+				Action: func(c *cli.Context) {
+					println("rules")
+				},
+			},
+		},
+	},
+	{
+		Name: "load_balancers",
+		Action: func(c *cli.Context) {
+			println("load_balancers")
+		},
+		Flags: []cli.Flag{
+			cli.StringFlag{
+				Name:  "load_balancer_id",
+				Value: "",
+				Usage: "load_balancer_id",
+			},
+		},
+		Subcommands: []cli.Command{
+			{
+				Name: "server_ips",
+				Action: func(c *cli.Context) {
+					println("server_ips")
+				},
+				Flags: []cli.Flag{
+					cli.StringFlag{
+						Name:  "server_ip",
+						Value: "",
+						Usage: "server_ip",
+					},
+				},
+			},
+			{
+				Name: "rules",
+				Action: func(c *cli.Context) {
+					println("rules")
+				},
+				Flags: []cli.Flag{
+					cli.StringFlag{
+						Name:  "rule_id",
+						Value: "",
+						Usage: "rule_id",
+					},
+				},
+			},
+		},
+	},
+	{
+		Name: "public_ips",
+		Action: func(c *cli.Context) {
+			println("public_ips")
+		},
+		Flags: []cli.Flag{
+			cli.StringFlag{
+				Name:  "ip_id",
+				Value: "",
+				Usage: "ip_id",
+			},
+		},
+	},
+	{
 		Name: "ping",
 		Action: func(c *cli.Context) {
 			pingapi.Ping(c, APIURL)
@@ -187,4 +315,13 @@ var commands = []cli.Command{
 // GetAPICommands returns the command "routes"
 func GetAPICommands() []cli.Command {
 	return commands
+}
+
+// TranslateRespCode translatees the response code
+func TranslateRespCode(code int) string {
+	switch code {
+	case 200:
+
+	}
+	return ""
 }
