@@ -554,6 +554,19 @@ var commands = []cli.Command{
 		},
 	},
 	{
+		Name: "datacenterse",
+		Action: func(c *cli.Context) {
+			println("datacenterse")
+		},
+		Flags: []cli.Flag{
+			cli.StringFlag{
+				Name:  "datacenter_id",
+				Value: "",
+				Usage: "datacenter_id",
+			},
+		},
+	},
+	{
 		Name: "auth",
 		Action: func(c *cli.Context) {
 			authapi.SetAuthToken(authToken)
