@@ -2,8 +2,8 @@ package apiv1
 
 import (
 	"github.com/codegangsta/cli"
-	"github.com/galexrt/1cloud-cli/apiv1/authapi"
 	"github.com/galexrt/1cloud-cli/apiv1/pingapi"
+	"github.com/galexrt/1cloud-cli/apiv1/serversapi"
 )
 
 // APIURL url to api
@@ -15,14 +15,11 @@ var commands = []cli.Command{
 	{
 		Name:    "servers",
 		Aliases: []string{"server", "srv"},
-		Usage:   "add or list servers ",
+		Action: func(c *cli.Context) {
+			serversapi.Servers(c, APIURL)
+		},
+		Usage: "add or list servers ",
 		Flags: []cli.Flag{
-			cli.StringFlag{
-				Name:        "token",
-				Value:       "",
-				Usage:       "token",
-				Destination: &authToken,
-			},
 			cli.StringFlag{
 				Name:  "server_id",
 				Value: "",
@@ -34,6 +31,7 @@ var commands = []cli.Command{
 				Name:    "list",
 				Aliases: []string{"ls"},
 				Action: func(c *cli.Context) {
+
 					println("server list", c.Args().First())
 				},
 			},
@@ -564,13 +562,6 @@ var commands = []cli.Command{
 				Value: "",
 				Usage: "datacenter_id",
 			},
-		},
-	},
-	{
-		Name: "auth",
-		Action: func(c *cli.Context) {
-			authapi.SetAuthToken(authToken)
-			authapi.Auth(c, APIURL)
 		},
 	},
 }

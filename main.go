@@ -5,7 +5,7 @@ import (
 
 	"github.com/codegangsta/cli"
 	"github.com/galexrt/1cloud-cli/apiv1"
-	_ "github.com/galexrt/1cloud-cli/apiv1/authapi"
+	"github.com/galexrt/1cloud-cli/apiv1/authapi"
 )
 
 func main() {
@@ -13,7 +13,14 @@ func main() {
 	app.Name = "1cloud-cli"
 	app.Usage = "access to 1&1 cloud api"
 	app.EnableBashCompletion = true
-
+	app.Flags = []cli.Flag{
+		cli.StringFlag{
+			Name:        "token",
+			Value:       "",
+			Usage:       "token",
+			Destination: &authapi.AuthToken,
+		},
+	}
 	app.Commands = apiv1.GetAPICommands()
 
 	app.Run(os.Args)
